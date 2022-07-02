@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GuvenlikDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GKatagori">
+          <Key>
+            <PropertyRef Name="KatagoriId" />
+          </Key>
+          <Property Name="KatagoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KatagoriAdi" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GMusteri">
+          <Key>
+            <PropertyRef Name="MusteriId" />
+          </Key>
+          <Property Name="MusteriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Adres" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GPersonel">
+          <Key>
+            <PropertyRef Name="PersonelId" />
+          </Key>
+          <Property Name="PersonelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PerAdSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="PerMail" Type="varchar" MaxLength="50" />
+          <Property Name="PerTel" Type="varchar" MaxLength="50" />
+          <Property Name="PerAdres" Type="varchar" MaxLength="50" />
+          <Property Name="KatagoriId" Type="int" />
+        </EntityType>
+        <EntityType Name="GSiparis">
+          <Key>
+            <PropertyRef Name="SiparisId" />
+          </Key>
+          <Property Name="SiparisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MusteriId" Type="int" />
+          <Property Name="PersonelId" Type="int" />
+        </EntityType>
+        <Association Name="FK_GPersonel_GKatagori">
+          <End Role="GKatagori" Type="Self.GKatagori" Multiplicity="0..1" />
+          <End Role="GPersonel" Type="Self.GPersonel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GKatagori">
+              <PropertyRef Name="KatagoriId" />
+            </Principal>
+            <Dependent Role="GPersonel">
+              <PropertyRef Name="KatagoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GSiparis_GMusteri">
+          <End Role="GMusteri" Type="Self.GMusteri" Multiplicity="0..1" />
+          <End Role="GSiparis" Type="Self.GSiparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GMusteri">
+              <PropertyRef Name="MusteriId" />
+            </Principal>
+            <Dependent Role="GSiparis">
+              <PropertyRef Name="MusteriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GSiparis_GPersonel">
+          <End Role="GPersonel" Type="Self.GPersonel" Multiplicity="0..1" />
+          <End Role="GSiparis" Type="Self.GSiparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GPersonel">
+              <PropertyRef Name="PersonelId" />
+            </Principal>
+            <Dependent Role="GSiparis">
+              <PropertyRef Name="PersonelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GuvenlikDbModelStoreContainer">
+          <EntitySet Name="GKatagori" EntityType="Self.GKatagori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GMusteri" EntityType="Self.GMusteri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GPersonel" EntityType="Self.GPersonel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GSiparis" EntityType="Self.GSiparis" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GPersonel_GKatagori" Association="Self.FK_GPersonel_GKatagori">
+            <End Role="GKatagori" EntitySet="GKatagori" />
+            <End Role="GPersonel" EntitySet="GPersonel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GSiparis_GMusteri" Association="Self.FK_GSiparis_GMusteri">
+            <End Role="GMusteri" EntitySet="GMusteri" />
+            <End Role="GSiparis" EntitySet="GSiparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GSiparis_GPersonel" Association="Self.FK_GSiparis_GPersonel">
+            <End Role="GPersonel" EntitySet="GPersonel" />
+            <End Role="GSiparis" EntitySet="GSiparis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GuvenlikDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GKatagori">
+          <Key>
+            <PropertyRef Name="KatagoriId" />
+          </Key>
+          <Property Name="KatagoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KatagoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GMusteri">
+          <Key>
+            <PropertyRef Name="MusteriId" />
+          </Key>
+          <Property Name="MusteriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GPersonel">
+          <Key>
+            <PropertyRef Name="PersonelId" />
+          </Key>
+          <Property Name="PersonelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PerMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PerTel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PerAdres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KatagoriId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="GSipari">
+          <Key>
+            <PropertyRef Name="SiparisId" />
+          </Key>
+          <Property Name="SiparisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MusteriId" Type="Int32" />
+          <Property Name="PersonelId" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_GPersonel_GKatagori">
+          <End Role="GKatagori" Type="Self.GKatagori" Multiplicity="0..1" />
+          <End Role="GPersonel" Type="Self.GPersonel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GKatagori">
+              <PropertyRef Name="KatagoriId" />
+            </Principal>
+            <Dependent Role="GPersonel">
+              <PropertyRef Name="KatagoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GSiparis_GMusteri">
+          <End Role="GMusteri" Type="Self.GMusteri" Multiplicity="0..1" />
+          <End Role="GSiparis" Type="Self.GSipari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GMusteri">
+              <PropertyRef Name="MusteriId" />
+            </Principal>
+            <Dependent Role="GSiparis">
+              <PropertyRef Name="MusteriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GSiparis_GPersonel">
+          <End Role="GPersonel" Type="Self.GPersonel" Multiplicity="0..1" />
+          <End Role="GSiparis" Type="Self.GSipari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GPersonel">
+              <PropertyRef Name="PersonelId" />
+            </Principal>
+            <Dependent Role="GSiparis">
+              <PropertyRef Name="PersonelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GuvenlikDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GKatagoris" EntityType="Self.GKatagori" />
+          <EntitySet Name="GMusteris" EntityType="Self.GMusteri" />
+          <EntitySet Name="GPersonels" EntityType="Self.GPersonel" />
+          <EntitySet Name="GSiparis" EntityType="Self.GSipari" />
+          <AssociationSet Name="FK_GPersonel_GKatagori" Association="Self.FK_GPersonel_GKatagori">
+            <End Role="GKatagori" EntitySet="GKatagoris" />
+            <End Role="GPersonel" EntitySet="GPersonels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GSiparis_GMusteri" Association="Self.FK_GSiparis_GMusteri">
+            <End Role="GMusteri" EntitySet="GMusteris" />
+            <End Role="GSiparis" EntitySet="GSiparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GSiparis_GPersonel" Association="Self.FK_GSiparis_GPersonel">
+            <End Role="GPersonel" EntitySet="GPersonels" />
+            <End Role="GSiparis" EntitySet="GSiparis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GuvenlikDbModelStoreContainer" CdmEntityContainer="GuvenlikDbEntities">
+          <EntitySetMapping Name="GKatagoris">
+            <EntityTypeMapping TypeName="GuvenlikDbModel.GKatagori">
+              <MappingFragment StoreEntitySet="GKatagori">
+                <ScalarProperty Name="KatagoriId" ColumnName="KatagoriId" />
+                <ScalarProperty Name="KatagoriAdi" ColumnName="KatagoriAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GMusteris">
+            <EntityTypeMapping TypeName="GuvenlikDbModel.GMusteri">
+              <MappingFragment StoreEntitySet="GMusteri">
+                <ScalarProperty Name="MusteriId" ColumnName="MusteriId" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GPersonels">
+            <EntityTypeMapping TypeName="GuvenlikDbModel.GPersonel">
+              <MappingFragment StoreEntitySet="GPersonel">
+                <ScalarProperty Name="PersonelId" ColumnName="PersonelId" />
+                <ScalarProperty Name="PerAdSoyad" ColumnName="PerAdSoyad" />
+                <ScalarProperty Name="PerMail" ColumnName="PerMail" />
+                <ScalarProperty Name="PerTel" ColumnName="PerTel" />
+                <ScalarProperty Name="PerAdres" ColumnName="PerAdres" />
+                <ScalarProperty Name="KatagoriId" ColumnName="KatagoriId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GSiparis">
+            <EntityTypeMapping TypeName="GuvenlikDbModel.GSipari">
+              <MappingFragment StoreEntitySet="GSiparis">
+                <ScalarProperty Name="SiparisId" ColumnName="SiparisId" />
+                <ScalarProperty Name="MusteriId" ColumnName="MusteriId" />
+                <ScalarProperty Name="PersonelId" ColumnName="PersonelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,68 @@
+﻿@model temagiydirme2.Models.GPersonel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/styles.css" rel="stylesheet" />
+<script src="~/js/datatables-simple-demo.js"></script>
+<script src="~/js/scripts.js"></script>
+<h2>Personel</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Delete Sayfası</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PerAdSoyad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerAdSoyad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerTel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerTel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerAdres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerAdres)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.KatagoriId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.KatagoriId)
+            </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

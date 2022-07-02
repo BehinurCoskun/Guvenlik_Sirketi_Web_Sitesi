@@ -1,0 +1,70 @@
+﻿
+@model IEnumerable<temagiydirme2.Models.GMusteri>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/styles.css" rel="stylesheet" />
+<script src="~/js/datatables-simple-demo.js"></script>
+<script src="~/js/scripts.js"></script>
+<h2>Müşteri Sayfası</h2>
+<p>
+    @Html.ActionLink("Müşteri Ekle", "Create")
+</p>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Veriler
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Adsoyad</th>
+                    <th>Mail</th>
+                    <th>Telefon</th>
+                    <th>Adres</th>
+
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Adsoyad</th>
+                    <th>Mail</th>
+                    <th>Telefon</th>
+                    <th>Adres</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AdSoyad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefon)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Adres)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Düzenle", "Edit", new { id = item.MusteriId }) |
+
+                            @Html.ActionLink("Sil", "Delete", new { id = item.MusteriId })
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
